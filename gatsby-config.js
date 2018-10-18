@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Batch Gatsby Default Starter',
+    title: 'Batch\'s Gatsby Starter',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -16,6 +16,7 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
+    'gatsby-plugin-postcss',
     'gatsby-plugin-offline',
   ],
 }
