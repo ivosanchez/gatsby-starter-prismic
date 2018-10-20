@@ -36,5 +36,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "ie 11"
+  ]
 }
