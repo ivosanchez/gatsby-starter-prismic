@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "Batch's Gatsby Starter",
+    siteUrl: 'https://www.batch.nz',
   },
   plugins: [
     'gatsby-transformer-sharp',
@@ -56,15 +57,47 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/images`,
         name: 'images',
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        resolveEnv: () => process.env.NODE_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }],
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null,
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null,
+          },
+        },
+      },
+    },
+    'gatsby-plugin-sitemap',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-postcss',
     'gatsby-plugin-offline',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-netlify-cache',
+    {
+      // Make sure to put last in the array
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        headers: {
+          '/*': ['Cache-Control: no-cache'],
+        },
+      },
+    },
   ],
 }
