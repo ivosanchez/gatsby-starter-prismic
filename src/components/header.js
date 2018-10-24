@@ -1,15 +1,10 @@
 import React from 'react'
-import { Link } from 'gatsby'
+
+import Menu from './Menu'
 
 const Header = ({ siteTitle }) => (
   <div className="bg-purple mb-6">
-    <div className="max-w-xl mx-auto p-6">
-      <h1>
-        <Link to="/" className="no-underline text-white">
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+    <Menu />
   </div>
 )
 

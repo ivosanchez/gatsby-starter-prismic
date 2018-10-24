@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -6,7 +6,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import '../styles/index.css'
 
-const Layout = ({ children }) => (
+const Layout = ({ logo, children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -18,7 +18,7 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <Fragment>
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
@@ -29,11 +29,8 @@ const Layout = ({ children }) => (
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div className="max-w-xl mx-auto p-6">
-          {' '}
-          {children}{' '}
-        </div>
-      </>
+        <div className="max-w-xl mx-auto p-6"> {children} </div>
+      </Fragment>
     )}
   />
 )
