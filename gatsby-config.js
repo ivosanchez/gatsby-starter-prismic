@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "Batch's Gatsby Starter",
-    siteUrl: 'https://www.batch.nz',
+    siteUrl: 'https://gatsby-starter-batch.netlify.com',
   },
   plugins: [
     'gatsby-transformer-sharp',

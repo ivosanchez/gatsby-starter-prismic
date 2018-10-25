@@ -1,8 +1,13 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
-  "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "name": "gatsby-starter-batch",
+  "description": "Gatsby Starter Batch",
+  "version": "0.1.0",
+  "homepage": "https://gatsby-starter-batch.netlify.com/",
+  "bugs": {
+    "url": "https://github.com/batchnz/gatsby-starter-batch/issues",
+    "email": "development@batch.nz"
+  },
+  "author": " Batch Development Limited <hello@batch.nz>",
   "dependencies": {
     "autoprefixer": "^9.2.1",
     "gatsby": "^2.0.25",
@@ -33,7 +38,7 @@
     "url-join": "^4.0.0"
   },
   "keywords": [
-    "gatsby"
+    "gatsby, batch, christchurch, new zealand"
   ],
   "license": "MIT",
   "scripts": {
