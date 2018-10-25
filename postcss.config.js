@@ -12,7 +12,14 @@ PreCSS run the following plugins (in this order):
 module.exports = {
   plugins: [
     require('precss'),
+    require('stylelint')({
+      extends: 'stylelint-config-recommended',
+      rules: {
+        'block-no-empty': null,
+      },
+    }),
     require('tailwindcss')('./tailwind.config.js'),
     require('autoprefixer')(),
+    require('postcss-reporter')({ clearReportedMessages: true }),
   ],
 }
