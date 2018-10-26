@@ -64,6 +64,14 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_TRACKING_ID,
+        head: true, // Put tracking script in the head
+        respectDNT: true, // Respect users who have enabled Do Not Track
+      },
+    },
+    {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         resolveEnv: () => process.env.NODE_ENV,
