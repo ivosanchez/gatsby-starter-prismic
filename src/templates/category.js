@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import PostListItem from '../components/PostListItem'
+import SEOPage from '../components/SEO/Page'
 
 class CategoryTemplate extends Component {
   render() {
-    const { data, pageContext } = this.props
+    const { data, pageContext, location } = this.props
     const posts = data.allPrismicPost.edges
     return (
-      <Layout>
-        <Helmet title={pageContext.title} />
+      <Layout location={location}>
+        <SEOPage title={pageContext.title} location={location} />
         <h1 className="mb-6">{pageContext.title}</h1>
         {posts &&
           Array.isArray(posts) &&

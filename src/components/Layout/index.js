@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import Header from './header'
-import '../styles/index.css'
+import Header from '../Header'
+import SEOLayout from '../SEO/Layout'
 
-const Layout = ({ logo, children }) => (
+import '../../styles/index.css'
+
+const Layout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -19,15 +20,7 @@ const Layout = ({ logo, children }) => (
     `}
     render={data => (
       <Fragment>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        >
-          <html lang="en" />
-        </Helmet>
+        <SEOLayout location={location} />
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="max-w-xl mx-auto p-6"> {children} </div>
       </Fragment>
@@ -36,6 +29,7 @@ const Layout = ({ logo, children }) => (
 )
 
 Layout.propTypes = {
+  location: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 }
 

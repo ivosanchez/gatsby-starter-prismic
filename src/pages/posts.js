@@ -1,13 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import PostListItem from '../components/PostListItem'
+import SEOPage from '../components/SEO/Page'
 
-const PostsPage = props => {
-  const posts = props.data.allPrismicPost.edges
+const PostsPage = ({ data, location }) => {
+  const posts = data.allPrismicPost.edges
   return (
-    <Layout>
+    <Layout location={location}>
+      <SEOPage title="Post List" location={location} />
       <h1 className="mb-10">Post List</h1>
       {posts &&
         Array.isArray(posts) &&

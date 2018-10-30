@@ -105,7 +105,7 @@ exports.createPages = async ({ graphql, actions }) => {
       graphqlResult.data.allPrismicPage.edges.forEach(({ node }) => {
         createPage({
           path: `${node.uid}`,
-          component: path.resolve('./src/templates/Page.js'),
+          component: path.resolve('./src/templates/page.js'),
           context: { uid: node.uid },
         })
       })
@@ -123,7 +123,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const next = index === 0 ? null : posts[index - 1].node
         createPage({
           path: `posts/${node.uid}`,
-          component: path.resolve('./src/templates/Post.js'),
+          component: path.resolve('./src/templates/post.js'),
           context: {
             uid: node.uid,
             previous,
@@ -142,7 +142,7 @@ exports.createPages = async ({ graphql, actions }) => {
       graphqlTags.data.allPrismicTag.edges.forEach(({ node }) => {
         createPage({
           path: `tags/${node.uid}`,
-          component: path.resolve('./src/templates/Tag.js'),
+          component: path.resolve('./src/templates/tag.js'),
           context: {
             uid: node.uid,
             title: node.data.title,
@@ -160,7 +160,7 @@ exports.createPages = async ({ graphql, actions }) => {
       graphqlCategories.data.allPrismicCategories.edges.forEach(({ node }) => {
         createPage({
           path: `categories/${node.uid}`,
-          component: path.resolve('./src/templates/Category.js'),
+          component: path.resolve('./src/templates/category.js'),
           context: {
             uid: node.uid,
             title: node.data.title,

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
+import SEOPage from '../components/SEO/Page'
 
 function PostLabel({ label, text }) {
   return (
@@ -27,10 +27,14 @@ class PostTemplate extends Component {
         ? post.image.alt
         : 'Batch Post Feature Image'
     }
-
     return (
-      <Layout>
-        <Helmet title={post.title} />
+      <Layout location={this.props.location}>
+        <SEOPage
+          title={post.title}
+          type="article"
+          description={post.subheading}
+          location={this.props.location}
+        />
         <h1 className="mb-6">{post.title}</h1>
         <div className="mb-6">
           {post.tags &&

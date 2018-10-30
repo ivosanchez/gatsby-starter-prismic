@@ -1,26 +1,28 @@
+const config = require('./data/site-config')
+
 module.exports = {
   siteMetadata: {
-    title: "Batch's Gatsby Starter",
-    siteUrl: 'https://gatsby-starter-batch.netlify.com',
+    title: config.site.title,
+    siteUrl: config.site.url, // No trailing slash
   },
   plugins: [
     'gatsby-transformer-sharp',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: config.site.title,
+        short_name: config.manifest.shortName,
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: config.manifest.bgColor,
+        theme_color: config.manifest.themeColor,
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: config.manifest.icon, // This path is relative to the root of the site.
       },
     },
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'gatsby-starter-batch',
+        repositoryName: config.prismic.repository,
         accessToken: process.env.PRISMIC_TOKEN,
         // See: https://prismic.io/docs/javascript/query-the-api/link-resolving
         linkResolver: ({ node, key, value }) => doc => {
@@ -66,7 +68,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: process.env.GOOGLE_TRACKING_ID,
+        trackingId: config.google.analytics.trackingId,
         head: true, // Put tracking script in the head
         respectDNT: true, // Respect users who have enabled Do Not Track
       },
