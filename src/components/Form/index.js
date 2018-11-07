@@ -21,8 +21,14 @@ class Form extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...this.state }),
     })
-      .then(() => alert('Success!'))
-      .catch(error => alert(error))
+      .then(data => {
+        console.log(data)
+        alert('Success!', '👍')
+      })
+      .catch(error => {
+        console.log(error)
+        alert(error, '👍')
+      })
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
