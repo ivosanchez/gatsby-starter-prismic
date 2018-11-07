@@ -5,10 +5,11 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 import PostListItem from '../components/Post/ListItem'
+import Pagination from '../components/Post/Pagination'
 
-const IndexPage = ({ data, location }) => {
-  const page = data.prismicHomeIndex.data
-  const posts = page.link
+const PagePostsTemplate = ({ data, location, pageContext }) => {
+  const page = data.prismicPostsIndex.data
+  const posts = data.allPrismicPost.edges
   return (
     <Layout location={location}>
       <SEOPage title={page.title && page.title} location={location} />
@@ -23,30 +24,28 @@ const IndexPage = ({ data, location }) => {
       {posts &&
         Array.isArray(posts) &&
         posts.length > 0 &&
-        posts.map(({ post }) => {
-          const [node] = post.document
-          return (
-            <PostListItem
-              key={node.id}
-              uid={node.uid}
-              title={node.data.title}
-              date={node.data.date}
-              subheading={node.data.subheading}
-            />
-          )
-        })}
+        posts.map(({ node }) => (
+          <PostListItem
+            key={node.id}
+            uid={node.uid}
+            title={node.data.title}
+            date={node.data.date}
+            subheading={node.data.subheading}
+          />
+        ))}
+      <Pagination pageContext={pageContext} />
     </Layout>
   )
 }
 
-IndexPage.propTypes = {
+PagePostsTemplate.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 }
 
-export const pageHomeQuery = graphql`
-  query {
-    prismicHomeIndex {
+export const pagePostsQuery = graphql`
+  query($skip: Int!, $limit: Int!) {
+    prismicPostsIndex {
       uid
       data {
         title
@@ -54,16 +53,20 @@ export const pageHomeQuery = graphql`
         body {
           html
         }
-        link {
-          post {
-            document {
-              ...PostsItem
-            }
-          }
+      }
+    }
+    allPrismicPost(
+      sort: { fields: data___date, order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
+      edges {
+        node {
+          ...PostsItem
         }
       }
     }
   }
 `
 
-export default IndexPage
+export default PagePostsTemplate

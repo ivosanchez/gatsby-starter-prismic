@@ -1,3 +1,0 @@
-# https://www.netlify.com/docs/netlify-toml-reference/
-# [build.environment]
-#  PRISMIC_TOKEN = "Your Prismic API access token"

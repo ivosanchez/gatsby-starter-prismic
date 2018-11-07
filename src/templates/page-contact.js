@@ -4,11 +4,10 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
-import PostListItem from '../components/Post/ListItem'
+import Form from '../components/Form'
 
-const IndexPage = ({ data, location }) => {
-  const page = data.prismicHomeIndex.data
-  const posts = page.link
+const PageContactTemplate = ({ data, location }) => {
+  const page = data.prismicContactIndex.data
   return (
     <Layout location={location}>
       <SEOPage title={page.title && page.title} location={location} />
@@ -20,33 +19,19 @@ const IndexPage = ({ data, location }) => {
         className="rte"
         dangerouslySetInnerHTML={{ __html: page.body.html }}
       />
-      {posts &&
-        Array.isArray(posts) &&
-        posts.length > 0 &&
-        posts.map(({ post }) => {
-          const [node] = post.document
-          return (
-            <PostListItem
-              key={node.id}
-              uid={node.uid}
-              title={node.data.title}
-              date={node.data.date}
-              subheading={node.data.subheading}
-            />
-          )
-        })}
+      <Form />
     </Layout>
   )
 }
 
-IndexPage.propTypes = {
+PageContactTemplate.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 }
 
-export const pageHomeQuery = graphql`
+export const pageContactQuery = graphql`
   query {
-    prismicHomeIndex {
+    prismicContactIndex {
       uid
       data {
         title
@@ -54,16 +39,9 @@ export const pageHomeQuery = graphql`
         body {
           html
         }
-        link {
-          post {
-            document {
-              ...PostsItem
-            }
-          }
-        }
       }
     }
   }
 `
 
-export default IndexPage
+export default PageContactTemplate

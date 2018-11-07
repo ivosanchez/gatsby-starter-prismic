@@ -1,37 +1,41 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 
-class PageTemplate extends Component {
-  render() {
-    const [pageData] = this.props.data.allPrismicPage.edges
-    const page = pageData.node.data
-    return (
-      <Layout location={this.props.location}>
-        <SEOPage title={page.title} location={this.props.location} />
-        <h1 className="mb-6">{page.title}</h1>
-        <h2 className="mb-6">{page.subheading}</h2>
-        <div dangerouslySetInnerHTML={{ __html: page.body.html }} />
-      </Layout>
-    )
-  }
+const PageTemplate = ({ data, location }) => {
+  const page = data.prismicPage.data
+  return (
+    <Layout location={location}>
+      <SEOPage title={page.title && page.title} location={location} />
+      {page.title && (
+        <h1 className="text-4xl leading-tight mb-2">{page.title}</h1>
+      )}
+      {page.subheading && <h2 className="text-xl mb-8">{page.subheading}</h2>}
+      <div
+        className="rte"
+        dangerouslySetInnerHTML={{ __html: page.body.html }}
+      />
+    </Layout>
+  )
+}
+
+PageTemplate.propTypes = {
+  location: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 }
 
 export const pageQuery = graphql`
-  query PageByUid($uid: String!) {
-    allPrismicPage(filter: { uid: { eq: $uid } }) {
-      edges {
-        node {
-          uid
-          data {
-            title
-            subheading
-            body {
-              html
-            }
-          }
+  query pageByUid($uid: String!) {
+    prismicPage(uid: { eq: $uid }) {
+      uid
+      data {
+        title
+        subheading
+        body {
+          html
         }
       }
     }

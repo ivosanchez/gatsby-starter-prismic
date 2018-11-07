@@ -1,17 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Textarea = ({ name, label, placeholder, required }) => (
-  <div className="flex justify-start items-end mb-6 px-3 border border-red border-l-4 border-t-0 border-b-0 border-r-0">
-    <label htmlFor={`id_${name}`} className="mr-3 text-lg">
-      {label}:{' '}
+const Textarea = ({ name, label, value, placeholder, required, onChange }) => (
+  <div className="mb-4">
+    <label htmlFor={`id_${name}`} className="block mb-2">
+      {label}{' '}
     </label>
     <textarea
       id={`id_${name}`}
       name={name}
+      value={value}
       placeholder={placeholder && placeholder}
       required={required && required}
-      className="border border-gray px-3"
+      className="border p-2"
+      onChange={onChange}
     />
   </div>
 )
@@ -20,8 +22,10 @@ Textarea.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
+  value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default Textarea

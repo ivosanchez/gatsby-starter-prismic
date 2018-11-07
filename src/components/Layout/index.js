@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
@@ -19,11 +19,13 @@ const Layout = ({ children, location }) => (
       }
     `}
     render={data => (
-      <Fragment>
+      <>
         <SEOLayout location={location} />
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div className="max-w-xl mx-auto p-6"> {children} </div>
-      </Fragment>
+        <div className="leading-normal">
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div className="max-w-xl mx-auto px-4 mt-16 mb-20">{children}</div>
+        </div>
+      </>
     )}
   />
 )

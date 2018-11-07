@@ -34,7 +34,7 @@ TwitterCard.propTypes = {
   description: PropTypes.string,
 }
 TwitterCard.defaultProps = {
-  type: 'summary_large_image',
+  title: 'summary_large_image',
 }
 
 export default TwitterCard

@@ -1,34 +1,40 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 
-import SEOPage from '../components/SEO/Page'
 import Layout from '../components/Layout'
-import PostListItem from '../components/PostListItem'
+import PostListItem from '../components/Post/ListItem'
+import SEOPage from '../components/SEO/Page'
 
-class TagTemplate extends Component {
-  render() {
-    const { data, pageContext, location } = this.props
-    const posts = data.allPrismicPost.edges
-    return (
-      <Layout location={location}>
-        <SEOPage title={pageContext.title} location={location} />
-        <h1 className="mb-6">{pageContext.title}</h1>
-        {posts &&
-          Array.isArray(posts) &&
-          posts.length > 0 &&
-          posts.map(({ node }) => (
-            <PostListItem
-              key={node.id}
-              uid={node.uid}
-              title={node.data.title}
-              date={node.data.date}
-              subheading={node.data.subheading}
-            />
-          ))}
-        <Link to="/tags">to back</Link>
-      </Layout>
-    )
-  }
+const TagTemplate = ({ data, pageContext, location }) => {
+  const posts = data.allPrismicPost.edges
+  const hasPosts =
+    data.allPrismicPost.totalCount > 0 && posts && Array.isArray(posts)
+  return (
+    <Layout location={location}>
+      <SEOPage title={pageContext.title} location={location} />
+      <h1 className="text-4xl leading-tight mb-8">
+        Posts: <small>{pageContext.title}</small>
+      </h1>
+      {hasPosts &&
+        posts.map(({ node }) => (
+          <PostListItem
+            key={node.id}
+            uid={node.uid}
+            title={node.data.title}
+            date={node.data.date}
+            subheading={node.data.subheading}
+          />
+        ))}
+      <Link to="/tags">← View all tags</Link>
+    </Layout>
+  )
+}
+
+TagTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export const tagQuery = graphql`
@@ -44,6 +50,7 @@ export const tagQuery = graphql`
         }
       }
     ) {
+      totalCount
       edges {
         node {
           id

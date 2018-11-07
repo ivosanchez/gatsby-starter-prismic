@@ -1,4 +1,7 @@
 const config = require('./data/site-config')
+const { RichText } = require('prismic-reactjs')
+
+const { Elements } = RichText
 
 module.exports = {
   siteMetadata: {
@@ -25,33 +28,20 @@ module.exports = {
         repositoryName: config.prismic.repository,
         accessToken: process.env.PRISMIC_TOKEN,
         // See: https://prismic.io/docs/javascript/query-the-api/link-resolving
-        linkResolver: ({ node, key, value }) => doc => {
-          if (doc.type === 'menu') return '/menu/' + doc.uid
-          // Fallback for other types, in case new custom types get created
-          return '/' + doc.id
-        },
-        // See: https://prismic.io/docs/javascript/query-the-api/fetch-linked-document-fields
-        fetchLinks: [
-          'Color',
-          'Content Relationship',
-          'Date',
-          'Image',
-          'Key Text',
-          'Number',
-          'Rich Text',
-          'Select',
-          'Timestamp',
-          'Title',
-        ],
+        linkResolver: () => doc => `/${doc.uid}`,
         // See: https://prismic.io/docs/nodejs/beyond-the-api/html-serializer
-        htmlSerializer: ({ node, key, value }) => (
-          type,
-          element,
-          content,
-          children
-        ) => {
+        htmlSerializer: () => (type, element, content) => {
           switch (type) {
-            // case 'paragraph': return children = children.map(p => `<p class='paragraph'>${p}</p>`)
+            // First differentiate between a label and a preformatted filed
+            case Elements.label: {
+              if (element.data.label === 'quote') {
+                return `<blockquote><p>${content}</p></blockquote>`
+              }
+              return false
+            }
+            case Elements.preformatted: {
+              return null
+            }
             default:
               return null
           }
@@ -94,9 +84,21 @@ module.exports = {
         },
       },
     },
+    'gatsby-plugin-lodash',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-postcss',
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [
+          require('precss'),
+          require('stylelint'),
+          require('tailwindcss')('./tailwind.config.js'),
+          require('autoprefixer')(),
+          require('postcss-reporter')({ clearReportedMessages: true }),
+        ],
+      },
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-sharp',
     'gatsby-plugin-netlify-cache',

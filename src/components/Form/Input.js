@@ -1,10 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Input = ({ type, name, label, placeholder, required }) => (
-  <div className="flex justify-start items-end mb-6 px-3 border border-red border-l-4 border-t-0 border-b-0 border-r-0">
-    <label htmlFor={`id_${name}`} className="mr-3 text-lg">
-      {label}:{' '}
+const Input = ({
+  type,
+  name,
+  label,
+  value,
+  placeholder,
+  required,
+  onChange,
+}) => (
+  <div className="mb-4">
+    <label htmlFor={`id_${name}`} className="block mb-2">
+      {label}{' '}
     </label>
     <input
       type={type ? type : 'text'}
@@ -12,7 +20,9 @@ const Input = ({ type, name, label, placeholder, required }) => (
       name={name}
       placeholder={placeholder && placeholder}
       required={required && required}
-      className="border border-gray px-3"
+      className="border p-2"
+      value={value}
+      onChange={onChange}
     />
   </div>
 )
@@ -21,8 +31,14 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]).isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default Input

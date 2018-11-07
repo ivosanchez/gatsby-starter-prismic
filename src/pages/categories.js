@@ -1,34 +1,43 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 
-export default class Categories extends Component {
-  render() {
-    const { data, location } = this.props
-    const categoriesTotal = data.allPrismicCategories.totalCount
-
-    let categories = false
-    if (categoriesTotal > 0) categories = data.allPrismicCategories.edges
-
-    return (
-      <Layout location={location}>
-        <h1 className="mb-6">{categoriesTotal} Categories:</h1>
-        {categories &&
-          Array.isArray(categories) &&
-          categories.map(({ node }) => (
+const Categories = ({ data, location }) => {
+  const categories = data.allPrismicCategories.edges
+  const hasCategories =
+    data.allPrismicCategories.totalCount > 0 &&
+    categories &&
+    Array.isArray(categories)
+  return (
+    <Layout location={location}>
+      <SEOPage title="categories page" location={location} />
+      <h1 className="text-4xl leading-tight mb-8">Categories</h1>
+      {hasCategories ? (
+        categories.map(({ node }) => {
+          return (
             <div key={node.id} className="mb-6">
-              <SEOPage title={node.data.title} location={location} />
               <Link to={`/categories/${node.uid}`}>
                 <h2>{node.data.title}</h2>
               </Link>
             </div>
-          ))}
-      </Layout>
-    )
-  }
+          )
+        })
+      ) : (
+        <h2>No Tag Found</h2>
+      )}
+    </Layout>
+  )
 }
+
+Categories.propTypes = {
+  location: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+}
+
+export default Categories
 
 export const categoryQuery = graphql`
   query {
