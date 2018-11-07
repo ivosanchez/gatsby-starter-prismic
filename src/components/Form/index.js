@@ -18,8 +18,8 @@ class Form extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (state.success || stat.error) {
-      this.setState(preState => ({
+    if (state.success || state.error) {
+      this.setState(() => ({
         success: false,
         error: null,
       }))
