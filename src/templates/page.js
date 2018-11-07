@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 
 const PageTemplate = ({ data, location }) => {
-  const page = data.prismicPage.data
+  const page = data.prismicPages.data
   return (
     <Layout location={location}>
       <SEOPage title={page.title && page.title} location={location} />
@@ -29,7 +29,7 @@ PageTemplate.propTypes = {
 
 export const pageQuery = graphql`
   query pageByUid($uid: String!) {
-    prismicPage(uid: { eq: $uid }) {
+    prismicPages(uid: { eq: $uid }) {
       uid
       data {
         title

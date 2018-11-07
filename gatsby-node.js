@@ -35,29 +35,29 @@ exports.createPages = async ({ graphql, actions }) => {
     // ! ↓ needs to be updated per project
     const graphqlResult = await graphql(`
       {
-        allPrismicPost {
+        allPrismicPosts {
           totalCount
         }
-        allPrismicTag {
+        allPrismicPostsTags {
           totalCount
         }
-        allPrismicCategories {
+        allPrismicPostsCategories {
           totalCount
         }
         allPrismicMenu {
           totalCount
         }
-        allPrismicPage {
+        allPrismicPages {
           totalCount
         }
-        allPrismicContactIndex {
+        allPrismicContact {
           totalCount
         }
       }
     `)
-    const promiseCategories = graphql(`
+    const promisePostCategories = graphql(`
       {
-        allPrismicCategories {
+        allPrismicPostsCategories {
           totalCount
           edges {
             node {
@@ -73,7 +73,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `)
     const promisePosts = graphql(`
       {
-        allPrismicPost(sort: { fields: data___date, order: DESC }) {
+        allPrismicPosts(sort: { fields: data___date, order: DESC }) {
           edges {
             node {
               uid
@@ -88,9 +88,9 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     `)
-    const promiseTags = graphql(`
+    const promisePostTags = graphql(`
       {
-        allPrismicTag {
+        allPrismicPostsTags {
           edges {
             node {
               uid
@@ -102,25 +102,9 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     `)
-    const promiseMenu = graphql(`
-      {
-        allPrismicMenu {
-          edges {
-            node {
-              uid
-              data {
-                link {
-                  isBroken
-                }
-              }
-            }
-          }
-        }
-      }
-    `)
     const promisePages = graphql(`
       {
-        allPrismicPage {
+        allPrismicPages {
           edges {
             node {
               uid
@@ -129,29 +113,29 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     `)
-    const promiseContactIndex = graphql(`
+    const promiseContact = graphql(`
       {
-        prismicContactIndex {
+        prismicContact {
           uid
         }
       }
     `)
     const {
-      allPrismicPost,
-      allPrismicTag,
-      allPrismicCategories,
-      allPrismicPage,
-      allPrismicContactIndex,
+      allPrismicPosts,
+      allPrismicPostsTags,
+      allPrismicPostsCategories,
+      allPrismicPages,
+      allPrismicContact,
     } = graphqlResult.data
 
     // ! Posts ↓ needs to be updated per project
     if (
-      allPrismicPost &&
-      allPrismicPost.totalCount &&
-      allPrismicPost.totalCount > 0
+      allPrismicPosts &&
+      allPrismicPosts.totalCount &&
+      allPrismicPosts.totalCount > 0
     ) {
-      const graphqlPost = await promisePosts
-      const posts = graphqlPost.data.allPrismicPost.edges
+      const graphqlPosts = await promisePosts
+      const posts = graphqlPosts.data.allPrismicPosts.edges
       paginate({
         createPage,
         items: posts,
@@ -165,7 +149,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const next = index === 0 ? null : posts[index - 1].node
         createPage({
           path: `posts/${node.uid}`,
-          component: path.resolve('./src/templates/post.js'),
+          component: path.resolve('./src/templates/posts.js'),
           context: {
             uid: node.uid,
             previous,
@@ -176,15 +160,15 @@ exports.createPages = async ({ graphql, actions }) => {
     }
     // ! Tags ↓ needs to be updated per project
     if (
-      allPrismicTag &&
-      allPrismicTag.totalCount &&
-      allPrismicTag.totalCount > 0
+      allPrismicPostsTags &&
+      allPrismicPostsTags.totalCount &&
+      allPrismicPostsTags.totalCount > 0
     ) {
-      const graphqlTags = await promiseTags
-      graphqlTags.data.allPrismicTag.edges.forEach(({ node }) => {
+      const graphqlPostTags = await promisePostTags
+      graphqlPostTags.data.allPrismicPostsTags.edges.forEach(({ node }) => {
         createPage({
           path: `tags/${node.uid}`,
-          component: path.resolve('./src/templates/tag.js'),
+          component: path.resolve('./src/templates/posts-tags.js'),
           context: {
             uid: node.uid,
             title: node.data.title,
@@ -194,31 +178,33 @@ exports.createPages = async ({ graphql, actions }) => {
     }
     // ! Categories ↓ Needs to be updated per project
     if (
-      allPrismicCategories &&
-      allPrismicCategories.totalCount &&
-      allPrismicCategories.totalCount > 0
+      allPrismicPostsCategories &&
+      allPrismicPostsCategories.totalCount &&
+      allPrismicPostsCategories.totalCount > 0
     ) {
-      const graphqlCategories = await promiseCategories
-      graphqlCategories.data.allPrismicCategories.edges.forEach(({ node }) => {
-        createPage({
-          path: `categories/${node.uid}`,
-          component: path.resolve('./src/templates/category.js'),
-          context: {
-            uid: node.uid,
-            title: node.data.title,
-          },
-        })
-      })
+      const graphqlPostCategories = await promisePostCategories
+      graphqlPostCategories.data.allPrismicPostsCategories.edges.forEach(
+        ({ node }) => {
+          createPage({
+            path: `categories/${node.uid}`,
+            component: path.resolve('./src/templates/posts-categories.js'),
+            context: {
+              uid: node.uid,
+              title: node.data.title,
+            },
+          })
+        }
+      )
     }
 
     // page - repeatable page - repeat
     if (
-      allPrismicPage &&
-      allPrismicPage.totalCount &&
-      allPrismicPage.totalCount > 0
+      allPrismicPages &&
+      allPrismicPages.totalCount &&
+      allPrismicPages.totalCount > 0
     ) {
       const graphqlPages = await promisePages
-      graphqlPages.data.allPrismicPage.edges.forEach(({ node }) => {
+      graphqlPages.data.allPrismicPages.edges.forEach(({ node }) => {
         createPage({
           path: node.uid,
           component: path.resolve('./src/templates/page.js'),
@@ -230,12 +216,12 @@ exports.createPages = async ({ graphql, actions }) => {
     }
     // page - contact page - single
     if (
-      allPrismicContactIndex &&
-      allPrismicContactIndex.totalCount &&
-      allPrismicContactIndex.totalCount === 1
+      allPrismicContact &&
+      allPrismicContact.totalCount &&
+      allPrismicContact.totalCount === 1
     ) {
-      const graphqlPagesContact = await promiseContactIndex
-      const pageContactUid = graphqlPagesContact.data.prismicContactIndex.uid
+      const graphqlPagesContact = await promiseContact
+      const pageContactUid = graphqlPagesContact.data.prismicContact.uid
       createPage({
         path: pageContactUid,
         component: path.resolve('./src/templates/page-contact.js'),

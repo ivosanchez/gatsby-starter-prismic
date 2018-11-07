@@ -26,13 +26,13 @@ const Menu = ({ menuList }) => (
                 link {
                   isBroken
                   document {
-                    ... on PrismicPage {
+                    ... on PrismicPages {
                       uid
                     }
                     ... on PrismicPostsIndex {
                       uid
                     }
-                    ... on PrismicContactIndex {
+                    ... on PrismicContact {
                       uid
                     }
                   }

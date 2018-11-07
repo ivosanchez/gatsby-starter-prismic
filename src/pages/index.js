@@ -7,7 +7,7 @@ import SEOPage from '../components/SEO/Page'
 import PostListItem from '../components/Post/ListItem'
 
 const IndexPage = ({ data, location }) => {
-  const page = data.prismicHomeIndex.data
+  const page = data.prismicHome.data
   const posts = page.link
   return (
     <Layout location={location}>
@@ -46,7 +46,7 @@ IndexPage.propTypes = {
 
 export const pageHomeQuery = graphql`
   query {
-    prismicHomeIndex {
+    prismicHome {
       uid
       data {
         title

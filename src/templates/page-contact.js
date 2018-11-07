@@ -7,7 +7,7 @@ import SEOPage from '../components/SEO/Page'
 import Form from '../components/Form'
 
 const PageContactTemplate = ({ data, location }) => {
-  const page = data.prismicContactIndex.data
+  const page = data.prismicContact.data
   return (
     <Layout location={location}>
       <SEOPage title={page.title && page.title} location={location} />
@@ -31,7 +31,7 @@ PageContactTemplate.propTypes = {
 
 export const pageContactQuery = graphql`
   query {
-    prismicContactIndex {
+    prismicContact {
       uid
       data {
         title

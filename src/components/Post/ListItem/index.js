@@ -25,7 +25,7 @@ PostListItem.propTypes = {
 }
 
 export const PostsItemFragment = graphql`
-  fragment PostsItem on PrismicPost {
+  fragment PostsItem on PrismicPosts {
     uid
     id
     data {

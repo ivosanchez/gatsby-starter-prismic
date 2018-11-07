@@ -6,9 +6,9 @@ import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 
 const Posts = ({ data, location }) => {
-  const tags = data.allPrismicTag.edges
+  const tags = data.allPrismicPostsTags.edges
   const hasTags =
-    data.allPrismicTag.totalCount > 0 && tags && Array.isArray(tags)
+    data.allPrismicPostsTags.totalCount > 0 && tags && Array.isArray(tags)
   return (
     <Layout location={location}>
       <SEOPage title="tags page" location={location} />
@@ -39,7 +39,7 @@ export default Posts
 
 export const tagsQuery = graphql`
   query {
-    allPrismicTag {
+    allPrismicPostsTags {
       totalCount
       edges {
         node {

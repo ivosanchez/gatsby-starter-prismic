@@ -9,7 +9,7 @@ import PostLabel from '../components/Post/Label'
 
 const PostTemplate = ({ data, pageContext, location }) => {
   const { previous, next } = pageContext
-  const post = data.allPrismicPost.edges[0].node.data
+  const post = data.allPrismicPosts.edges[0].node.data
 
   let localImage = false
   if (post.image.url && post.image.localFile.childImageSharp) {
@@ -91,8 +91,8 @@ PostTemplate.propTypes = {
 }
 
 export const postQuery = graphql`
-  query PostByUid($uid: String!) {
-    allPrismicPost(filter: { uid: { eq: $uid } }) {
+  query PostsByUid($uid: String!) {
+    allPrismicPosts(filter: { uid: { eq: $uid } }) {
       edges {
         node {
           uid

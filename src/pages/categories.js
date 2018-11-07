@@ -6,9 +6,9 @@ import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
 
 const Categories = ({ data, location }) => {
-  const categories = data.allPrismicCategories.edges
+  const categories = data.allPrismicPostsCategories.edges
   const hasCategories =
-    data.allPrismicCategories.totalCount > 0 &&
+    data.allPrismicPostsCategories.totalCount > 0 &&
     categories &&
     Array.isArray(categories)
   return (
@@ -41,7 +41,7 @@ export default Categories
 
 export const categoryQuery = graphql`
   query {
-    allPrismicCategories {
+    allPrismicPostsCategories {
       totalCount
       edges {
         node {

@@ -13,7 +13,7 @@ const PreviousBtn = ({ humanPageNumber, previousPagePath }) => {
     )
   } else {
     return (
-      <li>
+      <li className="list-reset">
         <Link
           className="block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
           to={previousPagePath}
@@ -29,7 +29,7 @@ const NextBtn = ({ humanPageNumber, nextPagePath, numberOfPages }) => {
   const isLastPage = humanPageNumber === numberOfPages
   if (isLastPage) {
     return (
-      <li>
+      <li className="list-reset">
         <span className="block text-grey px-3 py-2">End</span>
       </li>
     )
@@ -54,7 +54,7 @@ const PagesLinks = ({ numberOfPages, pageNumber }) => {
     const path = pageIndex === 0 ? '/posts' : `/posts/${pageIndex + 1}`
     const renderHumanPageNumber = pageIndex + 1
     return (
-      <li key={renderHumanPageNumber}>
+      <li key={renderHumanPageNumber} className="list-reset">
         {isActive ? (
           <span className="block text-grey px-3 py-2">
             {renderHumanPageNumber}

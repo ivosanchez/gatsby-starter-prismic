@@ -6,10 +6,10 @@ import Layout from '../components/Layout'
 import PostListItem from '../components/Post/ListItem'
 import SEOPage from '../components/SEO/Page'
 
-const CategoryTemplate = ({ data, pageContext, location }) => {
-  const posts = data.allPrismicPost.edges
-  const hasPosts =
-    data.allPrismicPost.totalCount > 0 && posts && Array.isArray(posts)
+const PostTagsTemplate = ({ data, pageContext, location }) => {
+  const posts = []
+  const hasPosts = data.allPrismicPosts && data.allPrismicPosts.totalCount > 0
+  if (hasPosts) posts.push(...data.allPrismicPosts.edges)
   return (
     <Layout location={location}>
       <SEOPage title={pageContext.title} location={location} />
@@ -26,36 +26,39 @@ const CategoryTemplate = ({ data, pageContext, location }) => {
             subheading={node.data.subheading}
           />
         ))}
-      <Link to="/categories">← View all categories</Link>
+      {!hasPosts && <h2>No Post</h2>}
+      <Link to="/tags">← View all tags</Link>
     </Layout>
   )
 }
 
-CategoryTemplate.propTypes = {
+PostTagsTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
   pageContext: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
 }
 
-export const categoryQuery = graphql`
-  query PostByCategory($uid: String!) {
-    allPrismicPost(
-      filter: { data: { category: { uid: { eq: $uid } } } }
-      sort: { fields: [data___title], order: DESC }
+export const postTagsQuery = graphql`
+  query PostsByTag($uid: String!) {
+    allPrismicPosts(
+      filter: {
+        data: {
+          tags: {
+            elemMatch: {
+              tag: { document: { elemMatch: { uid: { eq: $uid } } } }
+            }
+          }
+        }
+      }
     ) {
       totalCount
       edges {
         node {
-          id
-          uid
-          data {
-            title
-            subheading
-            date(formatString: "dddd DD MMMM YYYY")
-          }
+          ...PostsItem
         }
       }
     }
   }
 `
-export default CategoryTemplate
+
+export default PostTagsTemplate

@@ -9,7 +9,7 @@ import Pagination from '../components/Post/Pagination'
 
 const PagePostsTemplate = ({ data, location, pageContext }) => {
   const page = data.prismicPostsIndex.data
-  const posts = data.allPrismicPost.edges
+  const posts = data.allPrismicPosts.edges
   return (
     <Layout location={location}>
       <SEOPage title={page.title && page.title} location={location} />
@@ -55,7 +55,7 @@ export const pagePostsQuery = graphql`
         }
       }
     }
-    allPrismicPost(
+    allPrismicPosts(
       sort: { fields: data___date, order: DESC }
       skip: $skip
       limit: $limit
