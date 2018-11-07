@@ -16,7 +16,7 @@ class Form extends Component {
   }
 
   handleSubmit = e => {
-    fetch('/', {
+    fetch('/?no-cache=1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...this.state }),
@@ -29,6 +29,7 @@ class Form extends Component {
         console.log(error)
         alert(error, '👍')
       })
+    e.preventDefault()
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
