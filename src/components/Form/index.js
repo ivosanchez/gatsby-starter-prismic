@@ -13,14 +13,6 @@ class Form extends Component {
     name: '',
     email: '',
     message: '',
-    success: false,
-    error: null,
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.success || prevState.error)
-      return { success: false, error: null }
-    return null
   }
 
   handleSubmit = e => {
@@ -30,19 +22,10 @@ class Form extends Component {
       body: encode({ 'form-name': 'contact', ...this.state }),
     })
       .then(() => {
-        this.setState(preState => ({
-          name: '',
-          email: '',
-          message: '',
-          success: true,
-          error: null,
-        }))
+        alert('Success')
       })
       .catch(error => {
-        this.setState(preState => ({
-          success: false,
-          error,
-        }))
+        alert(error)
       })
     e.preventDefault()
   }
@@ -50,7 +33,7 @@ class Form extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
   render() {
-    const { name, email, message, success, error } = this.state
+    const { name, email, message } = this.state
     return (
       <form className="my-6" onSubmit={this.handleSubmit}>
         <Input
@@ -85,15 +68,6 @@ class Form extends Component {
         >
           Send
         </button>
-        {success && !error && <div className="text-green-dark">Success</div>}
-        {!success &&
-          error && (
-            <div className="text-red">
-              {error.message ||
-                (typeof error === 'string' && error) ||
-                'Form submission is failed'}
-            </div>
-          )}
       </form>
     )
   }
