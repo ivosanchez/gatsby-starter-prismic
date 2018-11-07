@@ -17,13 +17,10 @@ class Form extends Component {
     error: null,
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (state.success || state.error) {
-      this.setState(() => ({
-        success: false,
-        error: null,
-      }))
-    }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.success || prevState.error)
+      return { success: false, error: null }
+    return null
   }
 
   handleSubmit = e => {
@@ -34,6 +31,9 @@ class Form extends Component {
     })
       .then(() => {
         this.setState(preState => ({
+          name: '',
+          email: '',
+          message: '',
           success: true,
           error: null,
         }))
