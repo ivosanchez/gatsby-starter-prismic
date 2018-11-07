@@ -13,6 +13,17 @@ class Form extends Component {
     name: '',
     email: '',
     message: '',
+    success: false,
+    error: null,
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.success || stat.error) {
+      this.setState(preState => ({
+        success: false,
+        error: null,
+      }))
+    }
   }
 
   handleSubmit = e => {
@@ -21,13 +32,17 @@ class Form extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...this.state }),
     })
-      .then(data => {
-        console.log(data)
-        alert('Success!', '👍')
+      .then(() => {
+        this.setState(preState => ({
+          success: true,
+          error: null,
+        }))
       })
       .catch(error => {
-        console.log(error)
-        alert(error, '👍')
+        this.setState(preState => ({
+          success: false,
+          error,
+        }))
       })
     e.preventDefault()
   }
@@ -35,7 +50,7 @@ class Form extends Component {
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
   render() {
-    const { name, email, message } = this.state
+    const { name, email, message, success, error } = this.state
     return (
       <form className="my-6" onSubmit={this.handleSubmit}>
         <Input
@@ -70,6 +85,15 @@ class Form extends Component {
         >
           Send
         </button>
+        {success && !error && <div className="text-green-dark">Success</div>}
+        {!success &&
+          error && (
+            <div className="text-red">
+              {error.message ||
+                (typeof error === 'string' && error) ||
+                'Form submission is failed'}
+            </div>
+          )}
       </form>
     )
   }
