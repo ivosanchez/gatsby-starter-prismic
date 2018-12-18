@@ -17,15 +17,15 @@ class Form extends Component {
   }
 
   handleSubmit = e => {
+    e.preventDefault()
     axios
       .post(
         // URL
-        '?no-cache=1',
+        'https://gatsby-starter-batch.netlify.com?no-cache=1',
         // Data
         encode({
-          'form-name': 'order',
+          'form-name': 'contact',
           ...this.state,
-          products: this.state.products.join(', '),
         }),
         // Header
         { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
@@ -36,7 +36,6 @@ class Form extends Component {
       .catch(error => {
         alert(error)
       })
-    e.preventDefault()
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
