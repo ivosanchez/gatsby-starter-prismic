@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import Input from './Input'
 import Textarea from './Textarea'
 
@@ -16,11 +17,19 @@ class Form extends Component {
   }
 
   handleSubmit = e => {
-    fetch('/?no-cache=1', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
-    })
+    axios
+      .post(
+        // URL
+        '?no-cache=1',
+        // Data
+        encode({
+          'form-name': 'order',
+          ...this.state,
+          products: this.state.products.join(', '),
+        }),
+        // Header
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      )
       .then(() => {
         alert('Success')
       })
