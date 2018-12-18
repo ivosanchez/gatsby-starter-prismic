@@ -99,6 +99,10 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-transition-link',
+      options: { layout: false },
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-sharp',
     'gatsby-plugin-netlify-cache',

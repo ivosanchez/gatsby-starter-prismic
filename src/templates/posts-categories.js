@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import PostListItem from '../components/Post/ListItem'
 import SEOPage from '../components/SEO/Page'
+import Link from '../components/TransitionLink'
 
 const PostCategoriesTemplate = ({ data, pageContext, location }) => {
   const posts = []
@@ -27,7 +28,9 @@ const PostCategoriesTemplate = ({ data, pageContext, location }) => {
           />
         ))}
       {!hasPosts && <h2>No Post</h2>}
-      <Link to="/categories">← View all categories</Link>
+      <Link cover to="/categories">
+        ← View all categories
+      </Link>
     </Layout>
   )
 }

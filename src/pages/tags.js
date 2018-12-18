@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEOPage from '../components/SEO/Page'
+import Link from '../components/TransitionLink'
 
 const Posts = ({ data, location }) => {
   const tags = data.allPrismicPostsTags.edges
@@ -17,7 +18,7 @@ const Posts = ({ data, location }) => {
         tags.map(({ node }) => {
           return (
             <div key={node.id} className="mb-6">
-              <Link to={`/tags/${node.uid}`}>
+              <Link cover direction="right" to={`/tags/${node.uid}`}>
                 <h2>{node.data.title}</h2>
               </Link>
             </div>
