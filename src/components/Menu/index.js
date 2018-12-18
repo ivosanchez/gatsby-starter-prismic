@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
+import Link from '../TransitionLink'
 
 const MenuItem = ({ title, link }) => (
   <Link
+    classSpan="inline-block text-white mr-4 no-underline hover:underline focus:underline"
+    cover
+    direction="right"
     to={link}
-    className="inline-block text-white mr-4 no-underline hover:underline focus:underline"
   >
     {title}
   </Link>

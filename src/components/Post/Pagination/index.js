@@ -1,7 +1,7 @@
 // Used for tags, category and timestamp
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import Link from '../../TransitionLink'
 
 const PreviousBtn = ({ humanPageNumber, previousPagePath }) => {
   const isFirstPage = humanPageNumber === 1
@@ -15,7 +15,8 @@ const PreviousBtn = ({ humanPageNumber, previousPagePath }) => {
     return (
       <li className="list-reset">
         <Link
-          className="block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
+          classSpan="block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
+          cover
           to={previousPagePath}
         >
           Previous
@@ -37,7 +38,9 @@ const NextBtn = ({ humanPageNumber, nextPagePath, numberOfPages }) => {
     return (
       <li>
         <Link
-          className="block hover:text-white hover:bg-blue text-blue px-3 py-2"
+          classSpan="block hover:text-white hover:bg-blue text-blue px-3 py-2"
+          cover
+          direction="right"
           to={nextPagePath}
         >
           Next
@@ -61,7 +64,8 @@ const PagesLinks = ({ numberOfPages, pageNumber }) => {
           </span>
         ) : (
           <Link
-            className="block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
+            classSpan="block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
+            cover
             to={path}
           >
             {renderHumanPageNumber}

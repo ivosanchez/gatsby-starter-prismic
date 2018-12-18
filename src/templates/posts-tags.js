@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
+import Link from '../components/TransitionLink'
 
 import Layout from '../components/Layout'
 import PostListItem from '../components/Post/ListItem'
@@ -27,7 +28,9 @@ const PostTagsTemplate = ({ data, pageContext, location }) => {
           />
         ))}
       {!hasPosts && <h2>No Post</h2>}
-      <Link to="/tags">← View all tags</Link>
+      <Link cover to="/tags">
+        ← View all tags
+      </Link>
     </Layout>
   )
 }

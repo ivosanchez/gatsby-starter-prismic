@@ -1,12 +1,16 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
+import { graphql } from 'gatsby'
+
+import Link from '../../TransitionLink'
 
 const PostListItem = ({ uid, title, date, subheading }) => (
   <div className="mb-10">
     <h2 className="text-2xl leading-tight mb-1">
       <Link
-        className="no-underline hover:underline focus:underline"
+        classSpan="no-underline hover:underline focus:underline"
+        cover
+        direction="right"
         to={`/posts/${uid}`}
       >
         {title}
