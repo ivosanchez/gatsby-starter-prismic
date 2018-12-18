@@ -1,5 +1,7 @@
 .rte {
-    p, ul, ol {
-        margin-bottom: config('margin.4');
-    }
+  p,
+  ul,
+  ol {
+    margin-bottom: config('margin.4');
+  }
 }
