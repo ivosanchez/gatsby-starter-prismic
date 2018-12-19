@@ -21,7 +21,7 @@ class Form extends Component {
     axios
       .post(
         // URL
-        'https://gatsby-starter-batch.netlify.com?no-cache=1',
+        '?no-cache=1',
         // Data
         encode({
           'form-name': 'contact',
