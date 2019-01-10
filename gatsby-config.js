@@ -93,8 +93,8 @@ module.exports = {
         postCssPlugins: [
           require('tailwindcss')('./tailwind.config.js'),
           require('precss'),
-          require('stylelint'),
           require('autoprefixer')(),
+          require('stylelint'),
           require('postcss-reporter')({ clearReportedMessages: true }),
         ],
       },
