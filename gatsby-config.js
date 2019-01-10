@@ -91,9 +91,9 @@ module.exports = {
       resolve: `gatsby-plugin-postcss`,
       options: {
         postCssPlugins: [
+          require('tailwindcss')('./tailwind.config.js'),
           require('precss'),
           require('stylelint'),
-          require('tailwindcss')('./tailwind.config.js'),
           require('autoprefixer')(),
           require('postcss-reporter')({ clearReportedMessages: true }),
         ],
