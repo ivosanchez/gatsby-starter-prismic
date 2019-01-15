@@ -23,7 +23,7 @@ const SEOLayout = ({ location }) => {
         siteName={name}
         description={description}
         image={imageUrl}
-        url={url + location.pathname || ''}
+        url={url + location.pathname || '' + '/'}
       />
       <TwitterCard
         title={title}
