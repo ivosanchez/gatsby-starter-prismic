@@ -19,7 +19,22 @@ const PageContactTemplate = ({ data, location }) => {
         className="rte"
         dangerouslySetInnerHTML={{ __html: page.body.html }}
       />
-      <Form />
+      <form
+        name="contact"
+        method="post"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="text" name="name" placeholder="name" />
+        <input type="email" name="email" placeholder="email" />
+        <input type="textarea" name="message" placeholder="leave a message" />
+        <input type="text" name="newsletter" placeholder="newsletter" />
+        <input type="text" name="roles" placeholder="newsletter" />
+        <input type="text" name="plan" placeholder="plan" />
+        <button type="submit">Send</button>
+      </form>
+      {/* <Form /> */}
     </Layout>
   )
 }

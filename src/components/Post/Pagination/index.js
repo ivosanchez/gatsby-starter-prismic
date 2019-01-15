@@ -87,4 +87,5 @@ const Pagination = ({ pageContext }) => (
 Pagination.propTypes = {
   pageContext: PropTypes.object.isRequired,
 }
+
 export default Pagination

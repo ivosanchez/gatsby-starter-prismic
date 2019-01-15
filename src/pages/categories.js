@@ -14,7 +14,7 @@ const Categories = ({ data, location }) => {
     Array.isArray(categories)
   return (
     <Layout location={location}>
-      <SEOPage title="categories page" location={location} />
+      <SEOPage title="categories page" />
       <h1 className="text-4xl leading-tight mb-8">Categories</h1>
       {hasCategories ? (
         categories.map(({ node }) => {

@@ -9,7 +9,11 @@ const PageTemplate = ({ data, location }) => {
   const page = data.prismicPages.data
   return (
     <Layout location={location}>
-      <SEOPage title={page.title && page.title} location={location} />
+      <SEOPage
+        title={page.title && page.title}
+        location={location}
+        description="This is the Home description"
+      />
       {page.title && (
         <h1 className="text-4xl leading-tight mb-2">{page.title}</h1>
       )}

@@ -1,14 +1,14 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
 
 import config from '../../../data/site-config'
 import OpenGraph from './OpenGraph'
-import socialBanner from '../../images/social-banner.jpg'
+import TwitterCard from './TwitterCard'
 
 const SEOLayout = () => {
   const { name, url, title, description, keywords } = config.site
-  const socialBannerUrl = `${url}${socialBanner}`
+  const imageUrl = `${url}/${config.siteImage}` // Default image stored in ./static
+
   return (
     <>
       <Helmet>
@@ -18,19 +18,22 @@ const SEOLayout = () => {
         <meta name="keywords" content={keywords} />
       </Helmet>
       <OpenGraph
+        title={title}
         type="website"
         siteName={name}
-        url={url}
-        title={title}
         description={description}
-        image={socialBannerUrl}
+        image={imageUrl}
+        url={url}
+      />
+      <TwitterCard
+        title={title}
+        type="summary_large_image"
+        site={config.twitterHandle}
+        description={description}
+        image={imageUrl}
       />
     </>
   )
-}
-
-SEOLayout.propTypes = {
-  location: PropTypes.object,
 }
 
 export default SEOLayout

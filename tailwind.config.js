@@ -24,7 +24,7 @@ View the full documentation at https://tailwindcss.com.
 |
 */
 
-let defaultConfig = require('tailwindcss/defaultConfig')()
+// let defaultConfig = require('tailwindcss/defaultConfig')()
 
 /*
 |-------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ let defaultConfig = require('tailwindcss/defaultConfig')()
 let colors = {
   transparent: 'transparent',
 
-  black: '#000000',
+  black: '#22292f',
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',
   'grey-dark': '#8795a1',
@@ -82,7 +82,7 @@ let colors = {
   'green-darkest': '#0f2f21',
   'green-darker': '#1a4731',
   'green-dark': '#1f9d55',
-  green: '#1EFFBC',
+  green: '#38c172',
   'green-light': '#51d88a',
   'green-lighter': '#a2f5bf',
   'green-lightest': '#e3fcec',
@@ -95,13 +95,13 @@ let colors = {
   'teal-lighter': '#a0f0ed',
   'teal-lightest': '#e8fffe',
 
-  'blue-lightest': '#E8E6F8',
-  'blue-lighter': '#A399E1',
-  'blue-light': '#5D4DCB',
-  blue: '#1800B4',
-  'blue-dark': '#1600A2',
-  'blue-darker': '#0E006C',
-  'blue-darkest': '#070036',
+  'blue-darkest': '#12283a',
+  'blue-darker': '#1c3d5a',
+  'blue-dark': '#2779bd',
+  blue: '#3490dc',
+  'blue-light': '#6cb2eb',
+  'blue-lighter': '#bcdefa',
+  'blue-lightest': '#eff8ff',
 
   'indigo-darkest': '#191e38',
   'indigo-darker': '#2f365f',
@@ -126,18 +126,6 @@ let colors = {
   'pink-light': '#fa7ea8',
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
-
-  '-red': '#ff3021',
-  '-orange': '#ff9800',
-  '-yellow': '#FFEF14',
-  '-green': '#78E000',
-  '-blue': '#1CB0F6',
-  '-purple': '#9647E6',
-
-  '-blue-100': '#A399E1',
-  '-blue-300': '#5D4DCB',
-  '-blue-500': '#1600A2',
-  '-blue-700': '#0E006C',
 }
 
 module.exports = {
@@ -176,7 +164,6 @@ module.exports = {
   */
 
   screens: {
-    xs: '380px',
     sm: '576px',
     md: '768px',
     lg: '992px',
@@ -202,7 +189,40 @@ module.exports = {
   */
 
   fonts: {
-    sans: ['RationalText'],
+    sans: [
+      'system-ui',
+      'BlinkMacSystemFont',
+      '-apple-system',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif',
+    ],
+    serif: [
+      'Constantia',
+      'Lucida Bright',
+      'Lucidabright',
+      'Lucida Serif',
+      'Lucida',
+      'DejaVu Serif',
+      'Bitstream Vera Serif',
+      'Liberation Serif',
+      'Georgia',
+      'serif',
+    ],
+    mono: [
+      'Menlo',
+      'Monaco',
+      'Consolas',
+      'Liberation Mono',
+      'Courier New',
+      'monospace',
+    ],
   },
 
   /*
@@ -234,8 +254,6 @@ module.exports = {
     '3xl': '1.875rem', // 30px
     '4xl': '2.25rem', // 36px
     '5xl': '3rem', // 48px
-    '6xl': '4rem', // 64px
-    '7xl': '5rem', // 80px
   },
 
   /*
@@ -280,7 +298,6 @@ module.exports = {
     none: 1,
     tight: 1.25,
     normal: 1.5,
-    medium: 1.75,
     loose: 2,
   },
 
@@ -483,7 +500,6 @@ module.exports = {
   */
 
   height: {
-    '0': '0',
     auto: 'auto',
     px: '1px',
     '1': '0.25rem',
@@ -500,9 +516,6 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
-    '96': '24rem',
-    '128': '32rem',
-    '256': '64rem',
     full: '100%',
     screen: '100vh',
   },
@@ -624,7 +637,6 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    '64': '16rem',
   },
 
   /*
@@ -659,7 +671,6 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
-    '64': '16rem',
   },
 
   /*
@@ -715,7 +726,6 @@ module.exports = {
     default: '0 2px 4px 0 rgba(0,0,0,0.10)',
     md: '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
     lg: '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
-    xl: '0 15px 30px 0 rgba(0,0,0,0.22), 0 5px 15px 0 rgba(0,0,0,0.16)',
     inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
     outline: '0 0 0 3px rgba(52,144,220,0.5)',
     none: 'none',
@@ -838,7 +848,7 @@ module.exports = {
     float: ['responsive'],
     fonts: ['responsive'],
     fontWeights: ['responsive', 'hover', 'focus'],
-    height: ['responsive', 'group-hover'],
+    height: ['responsive'],
     leading: ['responsive'],
     lists: ['responsive'],
     margin: ['responsive'],
@@ -847,7 +857,7 @@ module.exports = {
     minHeight: ['responsive'],
     minWidth: ['responsive'],
     negativeMargin: ['responsive'],
-    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    opacity: ['responsive'],
     outline: ['focus'],
     overflow: ['responsive'],
     padding: ['responsive'],
@@ -859,13 +869,13 @@ module.exports = {
     svgStroke: [],
     tableLayout: ['responsive'],
     textAlign: ['responsive'],
-    textColors: ['responsive', 'hover', 'focus', 'group-hover'],
+    textColors: ['responsive', 'hover', 'focus'],
     textSizes: ['responsive'],
     textStyle: ['responsive', 'hover', 'focus'],
     tracking: ['responsive'],
     userSelect: ['responsive'],
     verticalAlign: ['responsive'],
-    visibility: ['responsive', 'group-hover'],
+    visibility: ['responsive'],
     whitespace: ['responsive'],
     width: ['responsive'],
     zIndex: ['responsive'],
@@ -888,7 +898,7 @@ module.exports = {
   plugins: [
     require('tailwindcss/plugins/container')({
       // center: true,
-      padding: '1rem',
+      // padding: '1rem',
     }),
   ],
 
