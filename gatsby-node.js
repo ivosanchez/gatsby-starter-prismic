@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const chalk = require('chalk')
 const PurgeCssPlugin = require('purgecss-webpack-plugin')
 const path = require('path')
