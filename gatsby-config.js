@@ -1,4 +1,4 @@
-const config = require('./data/site-config')
+const config = require('./config/site')
 const { RichText } = require('prismic-reactjs')
 
 const { Elements } = RichText
@@ -6,7 +6,10 @@ const { Elements } = RichText
 module.exports = {
   siteMetadata: {
     title: config.site.title,
-    siteUrl: config.site.url, // No trailing slash
+    description: config.site.description,
+    siteUrl: config.site.siteUrl, // No trailing slash
+    twitterHandle: config.site.twitterHandle,
+    image: config.site.image,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -31,9 +34,8 @@ module.exports = {
         icon: `src/images/${config.manifest.icon}`, // This path is relative to the root of the site
       },
     },
-    'gatsby-plugin-offline',
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: config.google.analytics.trackingId,
         head: true, // Put tracking script in the head
@@ -63,7 +65,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-postcss`,
+      resolve: 'gatsby-plugin-postcss',
       options: {
         // The plugin order matters
         postCssPlugins: [
@@ -79,6 +81,10 @@ module.exports = {
           require('postcss-reporter')({ clearReportedMessages: true }),
         ],
       },
+    },
+    {
+      resolve: 'gatsby-plugin-purgecss',
+      options: { printRejected: true, tailwind: true },
     },
     {
       resolve: 'gatsby-plugin-transition-link',
@@ -110,15 +116,6 @@ module.exports = {
         },
       },
     },
-    'gatsby-plugin-netlify-cache',
-    {
-      // Make sure to put last in the array
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        headers: {
-          '/*': ['Cache-Control: no-cache'],
-        },
-      },
-    },
+    'gatsby-plugin-offline',
   ],
 }
