@@ -5,7 +5,7 @@ import Link from '../TransitionLink'
 
 const MenuItem = ({ title, link }) => (
   <Link
-    classSpan="inline-block text-white mr-4 no-underline hover:underline focus:underline"
+    classSpan="text-white no-underline inline-block hover:underline focus:underline mr-6"
     cover
     direction="right"
     to={link}
@@ -53,22 +53,20 @@ const Menu = ({ menuList }) => (
         menuList = menuList.concat(allPrismicMenu.edges)
       }
       return (
-        <div className="flex-grow flex items-center">
-          <div className="text-sm flex-grow">
-            {menuList.map(({ node }) => {
-              // If no relationship filed or Relationship link is broken, return null
-              if (!node.data.link || node.data.link.isBroken) return null
-              // Slug is page's slug, relationship filed
-              const slug = node.data.link.document[0].uid
-              return (
-                <MenuItem
-                  title={node.data.title}
-                  link={`/${slug}`}
-                  key={node.id}
-                />
-              )
-            })}
-          </div>
+        <div className="text-sm flex items-center">
+          {menuList.map(({ node }) => {
+            // If no relationship filed or Relationship link is broken, return null
+            if (!node.data.link || node.data.link.isBroken) return null
+            // Slug is page's slug, relationship filed
+            const slug = node.data.link.document[0].uid
+            return (
+              <MenuItem
+                title={node.data.title}
+                link={`/${slug}`}
+                key={node.id}
+              />
+            )
+          })}
         </div>
       )
     }}

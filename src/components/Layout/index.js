@@ -21,7 +21,7 @@ const Layout = ({ children }) => (
       <>
         <div className="font-sans leading-normal">
           <Header siteTitle={data.site.siteMetadata.title} />
-          <div className="max-w-xl mx-auto px-4 mt-16 mb-20">{children}</div>
+          <div className="max-w-xl mx-auto py-10 px-4">{children}</div>
         </div>
       </>
     )}
