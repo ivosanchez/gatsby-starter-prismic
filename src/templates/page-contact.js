@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import Form from '../components/Form'
 
 const PageContactTemplate = ({ data, location }) => {
   const page = data.prismicContact.data
   return (
-    <Layout location={location}>
-      <SEOPage title={page.title && page.title} location={location} />
+    <Layout>
+      <SEO title={page.title && page.title} location={location} />
       {page.title && (
         <h1 className="text-4xl leading-tight mb-2">{page.title}</h1>
       )}

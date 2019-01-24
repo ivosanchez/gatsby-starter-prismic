@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import PostListItem from '../components/Post/ListItem'
 import Pagination from '../components/Post/Pagination'
 
@@ -11,8 +11,8 @@ const PagePostsTemplate = ({ data, location, pageContext }) => {
   const page = data.prismicPostsIndex.data
   const posts = data.allPrismicPosts.edges
   return (
-    <Layout location={location}>
-      <SEOPage title={page.title && page.title} location={location} />
+    <Layout>
+      <SEO title={page.title && page.title} location={location} />
       {page.title && (
         <h1 className="text-4xl leading-tight mb-2">{page.title}</h1>
       )}

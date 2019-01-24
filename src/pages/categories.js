@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import Link from '../components/TransitionLink'
 
 const Categories = ({ data, location }) => {
@@ -13,8 +13,8 @@ const Categories = ({ data, location }) => {
     categories &&
     Array.isArray(categories)
   return (
-    <Layout location={location}>
-      <SEOPage title="categories page" />
+    <Layout>
+      <SEO title="categories page" />
       <h1 className="text-4xl leading-tight mb-8">Categories</h1>
       {hasCategories ? (
         categories.map(({ node }) => {

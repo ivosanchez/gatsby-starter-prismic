@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import Link from '../components/TransitionLink'
 
 const Posts = ({ data, location }) => {
@@ -11,8 +11,8 @@ const Posts = ({ data, location }) => {
   const hasTags =
     data.allPrismicPostsTags.totalCount > 0 && tags && Array.isArray(tags)
   return (
-    <Layout location={location}>
-      <SEOPage title="tags page" location={location} />
+    <Layout>
+      <SEO title="tags page" location={location} />
       <h1 className="text-4xl leading-tight mb-8">Tags</h1>
       {hasTags ? (
         tags.map(({ node }) => {

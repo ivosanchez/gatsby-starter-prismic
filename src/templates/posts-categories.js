@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import PostListItem from '../components/Post/ListItem'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import Link from '../components/TransitionLink'
 
 const PostCategoriesTemplate = ({ data, pageContext, location }) => {
@@ -12,8 +12,8 @@ const PostCategoriesTemplate = ({ data, pageContext, location }) => {
   const hasPosts = data.allPrismicPosts && data.allPrismicPosts.totalCount > 0
   if (hasPosts) posts.push(...data.allPrismicPosts.edges)
   return (
-    <Layout location={location}>
-      <SEOPage title={pageContext.title} location={location} />
+    <Layout>
+      <SEO title={pageContext.title} location={location} />
       <h1 className="text-4xl leading-tight mb-8">
         Posts: <small>{pageContext.title}</small>
       </h1>

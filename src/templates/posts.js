@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 import Layout from '../components/Layout'
-import SEOPage from '../components/SEO/Page'
+import SEO from '../components/SEO'
 import PostLabel from '../components/Post/Label'
 
 const PostTemplate = ({ data, pageContext, location }) => {
@@ -17,8 +17,8 @@ const PostTemplate = ({ data, pageContext, location }) => {
     localImage.alt = post.image.alt ? post.image.alt : 'Feature Image'
   }
   return (
-    <Layout location={location}>
-      <SEOPage
+    <Layout>
+      <SEO
         title={post.title && post.title}
         type="article"
         description={post.subheading && post.subheading}
