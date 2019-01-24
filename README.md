@@ -3,7 +3,7 @@
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
   </a>
 </p>
-<h1 align="center">Batch's Gatsby Starter</h1>
+<h1 align="center">Batch's Gatsby Starter (Prismic Edition)</h1>
 
 Kick off your project with this boilerplate.
 
