@@ -2,8 +2,6 @@ const chalk = require('chalk')
 const path = require('path')
 const { paginate } = require('gatsby-awesome-pagination')
 
-const log = console.log
-
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   try {
@@ -207,9 +205,11 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      log(chalk.yellow.bgBlue(`❌  Error at CreatePages: ${error.message}`))
+      console.log(
+        chalk.yellow.bgBlue(`❌  Error at CreatePages: ${error.message}`)
+      )
     } else {
-      log(chalk.yellow.bgBlue(`❌ Error at CreatePages: ${error}`))
+      console.log(chalk.yellow.bgBlue(`❌ Error at CreatePages: ${error}`))
     }
   }
 }
