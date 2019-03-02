@@ -116,6 +116,6 @@ module.exports = {
         },
       },
     },
-    'gatsby-plugin-offline',
+    // 'gatsby-plugin-offline', // Use with care  
   ],
 }
