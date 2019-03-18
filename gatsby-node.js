@@ -1,3 +1,9 @@
+/**
+ * Implement Gatsby's Node APIs in this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/node-apis/
+ */
+
 const chalk = require('chalk')
 const path = require('path')
 const { paginate } = require('gatsby-awesome-pagination')
