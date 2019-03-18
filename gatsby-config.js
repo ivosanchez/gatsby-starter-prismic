@@ -1,6 +1,6 @@
 const config = require('./config/site')
-const { RichText } = require('prismic-reactjs')
 
+const { RichText } = require('prismic-reactjs')
 const { Elements } = RichText
 
 module.exports = {
